@@ -59,7 +59,11 @@ class _UpdateProfileState extends State<UpdateProfile> {
                     ),
                     SizedBox(height: 20),
                     TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text('Password reset link sent (test)')),
+                        );
+                      },
                       style: ButtonStyle(
                         overlayColor: WidgetStatePropertyAll(
                           Colors.transparent,
@@ -77,7 +81,23 @@ class _UpdateProfileState extends State<UpdateProfile> {
             Customelevatedbutton(
               backGroundColor: Colorpalette.red,
               buttonText: "Delete Account",
-              onPressed: () {},
+              onPressed: () async {
+                final confirm = await showDialog<bool>(
+                  context: context,
+                  builder: (ctx) => AlertDialog(
+                    title: const Text('Confirm'),
+                    content: const Text('Delete account? This is a test action.'),
+                    actions: [
+                      TextButton(onPressed: () => Navigator.of(ctx).pop(false), child: const Text('Cancel')),
+                      TextButton(onPressed: () => Navigator.of(ctx).pop(true), child: const Text('Delete')),
+                    ],
+                  ),
+                );
+                if (confirm == true) {
+                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Account deleted (test)')));
+                  Navigator.of(context).maybePop();
+                }
+              },
               forGroundColor: Colorpalette.mainTextColor,
             ),
             SizedBox(height: 16),
@@ -86,7 +106,9 @@ class _UpdateProfileState extends State<UpdateProfile> {
               child: Customelevatedbutton(
                 backGroundColor: Colorpalette.yellow,
                 buttonText: "Update Data",
-                onPressed: () {},
+                onPressed: () {
+                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Profile updated (test)')));
+                },
                 forGroundColor: Colorpalette.primaryColor,
               ),
             ),
