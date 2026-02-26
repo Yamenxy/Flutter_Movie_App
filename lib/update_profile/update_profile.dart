@@ -12,6 +12,7 @@ class UpdateProfile extends StatefulWidget {
   @override
   State<UpdateProfile> createState() => _UpdateProfileState();
 }
+
 ///
 
 class _UpdateProfileState extends State<UpdateProfile> {
@@ -61,7 +62,8 @@ class _UpdateProfileState extends State<UpdateProfile> {
                     TextButton(
                       onPressed: () {
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('Password reset link sent (test)')),
+                          const SnackBar(
+                              content: Text('Password reset link sent (test)')),
                         );
                       },
                       style: ButtonStyle(
@@ -86,15 +88,21 @@ class _UpdateProfileState extends State<UpdateProfile> {
                   context: context,
                   builder: (ctx) => AlertDialog(
                     title: const Text('Confirm'),
-                    content: const Text('Delete account? This is a test action.'),
+                    content:
+                        const Text('Delete account? This is a test action.'),
                     actions: [
-                      TextButton(onPressed: () => Navigator.of(ctx).pop(false), child: const Text('Cancel')),
-                      TextButton(onPressed: () => Navigator.of(ctx).pop(true), child: const Text('Delete')),
+                      TextButton(
+                          onPressed: () => Navigator.of(ctx).pop(false),
+                          child: const Text('Cancel')),
+                      TextButton(
+                          onPressed: () => Navigator.of(ctx).pop(true),
+                          child: const Text('Delete')),
                     ],
                   ),
                 );
                 if (confirm == true) {
-                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Account deleted (test)')));
+                  ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Account deleted (test)')));
                   Navigator.of(context).maybePop();
                 }
               },
@@ -107,7 +115,8 @@ class _UpdateProfileState extends State<UpdateProfile> {
                 backGroundColor: Colorpalette.yellow,
                 buttonText: "Update Data",
                 onPressed: () {
-                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Profile updated (test)')));
+                  ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Profile updated (test)')));
                 },
                 forGroundColor: Colorpalette.primaryColor,
               ),
