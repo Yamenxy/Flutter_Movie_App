@@ -4,6 +4,7 @@ import 'package:movies_app/screens/forget_password_screen.dart';
 import 'package:movies_app/screens/register_screen.dart';
 
 class LoginScreen extends StatefulWidget {
+  static const routeName = '/login';
   const LoginScreen({super.key});
 
   @override
@@ -43,7 +44,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     }
 
                     final emailRegex = RegExp(
-                      r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}\$',
+                      r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$',
                     );
                     if (!emailRegex.hasMatch(value)) {
                       return 'Please enter a valid email address';
@@ -196,9 +197,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   onPressed: () async {
                     try {
-                      final GoogleSignInAccount? googleUser = await googleSignIn
-                          .signIn();
-                      ();
+                      final GoogleSignInAccount? googleUser =
+                          await googleSignIn.signIn();
                       if (googleUser != null) {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(

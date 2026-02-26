@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'login.dart';
+import 'login_screen.dart';
 
 class OnboardingPage extends StatefulWidget {
   static const routeName = '/onboarding';
@@ -39,7 +39,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
       _controller.nextPage(
           duration: const Duration(milliseconds: 300), curve: Curves.easeInOut);
     } else {
-      Navigator.of(context).pushReplacementNamed(LoginPage.routeName);
+      Navigator.of(context).pushReplacementNamed(LoginScreen.routeName);
     }
   }
 
@@ -155,7 +155,9 @@ class _OnboardingPageState extends State<OnboardingPage> {
                                       ),
                                       alignment: Alignment.center,
                                       child: Text(
-                                        i < pages.length - 1 ? 'Next' : 'Finish',
+                                        i < pages.length - 1
+                                            ? 'Next'
+                                            : 'Finish',
                                         style: const TextStyle(
                                           color: Colors.black,
                                           fontWeight: FontWeight.w700,
@@ -174,11 +176,17 @@ class _OnboardingPageState extends State<OnboardingPage> {
                                 child: OutlinedButton(
                                   style: OutlinedButton.styleFrom(
                                     backgroundColor: const Color(0xFF121312),
-                                    side: const BorderSide(color: Colors.amber, width: 2),
-                                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+                                    side: const BorderSide(
+                                        color: Colors.amber, width: 2),
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(15)),
                                   ),
                                   onPressed: _back,
-                                  child: const Text('Back', style: TextStyle(color: Colors.amber, fontWeight: FontWeight.w600)),
+                                  child: const Text('Back',
+                                      style: TextStyle(
+                                          color: Colors.amber,
+                                          fontWeight: FontWeight.w600)),
                                 ),
                               ),
                             ],
