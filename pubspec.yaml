@@ -1,13 +1,15 @@
-name: new_gp_app
-description: A simple starter Flutter app for team collaboration.
+name: movies_app
+description: A minimal Flutter project scaffold.
 publish_to: 'none'
-version: 0.1.0+1
+version: 0.0.1
 environment:
-  sdk: '>=2.17.0 <4.0.0'
+  sdk: ">=2.18.0 <3.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
+  firebase_auth: ^4.4.0
+  google_sign_in: ^6.1.0
 
 dev_dependencies:
   flutter_test:
@@ -17,3 +19,4 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/
+    - assets/
