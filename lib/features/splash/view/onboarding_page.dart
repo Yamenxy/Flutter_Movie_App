@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../core/utilit/colors_app.dart';
-//import 'onboarding4.dart';
+import '../../../screens/onboarding.dart';
 
 class OnboardingPage extends StatefulWidget {
   static const String routeName = '/onboarding';
@@ -69,14 +69,12 @@ class _OnboardingPageState extends State<OnboardingPage> {
         duration: const Duration(milliseconds: 300),
         curve: Curves.easeInOut,
       );
-    }
-    /*else {
-      // آخر صفحة → الانتقال لشاشة Onboarding4
+    } else {
       Navigator.pushReplacementNamed(
         context,
-        Onboarding4.routeName,
+        OnboardingScreens.routeName,
       );
-    }*/
+    }
   }
 
   void _back() {

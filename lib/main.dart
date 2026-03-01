@@ -1,5 +1,7 @@
 ﻿import 'package:flutter/material.dart';
 import 'screens/login_screen.dart';
+import 'screens/main_shell.dart';
+import 'screens/onboarding.dart';
 
 import 'core/utilit/app_theme.dart';
 import 'features/splash/view/onboarding_page.dart';
@@ -21,7 +23,9 @@ class MoviesApp extends StatelessWidget {
       routes: {
         '/': (context) => const SplashScreen(),
         OnboardingPage.routeName: (context) => const OnboardingPage(),
+        OnboardingScreens.routeName: (context) => const OnboardingScreens(),
         LoginScreen.routeName: (context) => const LoginScreen(),
+        MainShell.routeName: (context) => const MainShell(),
       },
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,

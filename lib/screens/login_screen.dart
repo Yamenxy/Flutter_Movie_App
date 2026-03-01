@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:movies_app/screens/forget_password_screen.dart';
+import 'package:movies_app/screens/main_shell.dart';
 import 'package:movies_app/screens/register_screen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -132,7 +133,12 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                   onPressed: () {
-                    if (_formKey.currentState!.validate()) {}
+                    if (_formKey.currentState!.validate()) {
+                      Navigator.pushReplacementNamed(
+                        context,
+                        MainShell.routeName,
+                      );
+                    }
                   },
                   child: Text(
                     'Login',

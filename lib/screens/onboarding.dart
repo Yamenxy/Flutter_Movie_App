@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'login_screen.dart';
 
-class OnboardingPage extends StatefulWidget {
-  static const routeName = '/onboarding';
-  const OnboardingPage({Key? key}) : super(key: key);
+class OnboardingScreens extends StatefulWidget {
+  static const routeName = '/onboarding-screens';
+  const OnboardingScreens({Key? key}) : super(key: key);
 
   @override
-  State<OnboardingPage> createState() => _OnboardingPageState();
+  State<OnboardingScreens> createState() => _OnboardingScreensState();
 }
 
-class _OnboardingPageState extends State<OnboardingPage> {
+class _OnboardingScreensState extends State<OnboardingScreens> {
   final PageController _controller = PageController();
   int _index = 0;
 
