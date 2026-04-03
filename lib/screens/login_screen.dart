@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:movies_app/screens/forget_password_screen.dart';
 import 'package:movies_app/screens/main_shell.dart';
 import 'package:movies_app/screens/register_screen.dart';
+
+import 'forget_password_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   static const routeName = '/login';

@@ -1,13 +1,19 @@
 ﻿import 'package:flutter/material.dart';
+import 'package:movies_app/core/theme/ThemeManager.dart';
 import 'screens/login_screen.dart';
 import 'screens/main_shell.dart';
 import 'screens/onboarding.dart';
 
-import 'core/utilit/app_theme.dart';
 import 'features/splash/view/onboarding_page.dart';
 import 'features/splash/view/splash_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
-void main() {
+void main()async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform
+  );
   runApp(const MoviesApp());
 }
 
@@ -16,6 +22,7 @@ class MoviesApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Movies App',
@@ -27,8 +34,8 @@ class MoviesApp extends StatelessWidget {
         LoginScreen.routeName: (context) => const LoginScreen(),
         MainShell.routeName: (context) => const MainShell(),
       },
-      theme: AppTheme.lightTheme,
-      darkTheme: AppTheme.darkTheme,
+      theme:Thememanager.getAppTheme(),
+      darkTheme: Thememanager.getAppTheme(),
       themeMode: ThemeMode.dark,
     );
   }

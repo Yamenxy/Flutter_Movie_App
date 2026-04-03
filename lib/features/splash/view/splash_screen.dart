@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 ///const SplashScreen({super.key});
 import 'dart:async';
 
-import '../../../core/utilit/colors_app.dart'; // مهم للـ Timer
+import 'package:movies_app/core/theme/ColorPalette.dart';
+
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -27,7 +28,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.lightBlackColor,
+      backgroundColor: Colorpalette.primaryColor,
       body:
       SafeArea(
         child: Column(
