@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../core/utilit/colors_app.dart';
+import 'package:movies_app/core/theme/ColorPalette.dart';
 import '../../../screens/onboarding.dart';
 
 class OnboardingPage extends StatefulWidget {
@@ -28,7 +28,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
       'titleSize': 36.0,
       'subtitleSize': 20.0,
       'bottomOffset': 33.0,
-      'containerColor': AppColors.lightBlackColor.withOpacity(0.6),
+      'containerColor': Colorpalette.primaryColor,
       'radius': 15.0,
     },
     {
@@ -43,7 +43,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
       'titleSize': 24.0,
       'subtitleSize': 20.0,
       'bottomOffset': 0.0,
-      'containerColor': AppColors.lightBlackColor,
+      'containerColor': Colorpalette.primaryColor,
       'radius': 40.0,
     },
     {
@@ -58,7 +58,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
       'titleSize': 24.0,
       'subtitleSize': 20.0,
       'bottomOffset': 0.0,
-      'containerColor': AppColors.lightBlackColor,
+      'containerColor': Colorpalette.primaryColor,
       'radius': 40.0,
     },
   ];
@@ -160,7 +160,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                             page['title'],
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                              color: AppColors.whiteColor,
+                              color: Colorpalette.mainTextColor,
                               fontSize: page['titleSize'],
                               fontWeight: FontWeight.w700,
                             ),
@@ -170,7 +170,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                             page['subtitle'],
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                              color: AppColors.whiteColor.withOpacity(0.6),
+                              color: Colorpalette.mainTextColor,
                               fontSize: page['subtitleSize'],
                               fontWeight: FontWeight.w400,
                             ),
@@ -181,8 +181,8 @@ class _OnboardingPageState extends State<OnboardingPage> {
                             child: ElevatedButton(
                               onPressed: _next,
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: AppColors.yellowColor,
-                                foregroundColor: AppColors.lightBlackColor,
+                                backgroundColor: Colorpalette.yellow,
+                                foregroundColor: Colorpalette.primaryColor,
                                 padding:
                                 const EdgeInsets.symmetric(vertical: 15),
                                 textStyle: const TextStyle(
@@ -204,7 +204,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                                 onPressed: _back,
                                 style: OutlinedButton.styleFrom(
                                   backgroundColor: Colors.transparent,
-                                  foregroundColor: AppColors.yellowColor,
+                                  foregroundColor: Colorpalette.yellow,
                                   padding:
                                   const EdgeInsets.symmetric(vertical: 15),
                                   textStyle: const TextStyle(
@@ -212,8 +212,8 @@ class _OnboardingPageState extends State<OnboardingPage> {
                                     fontWeight: FontWeight.w600,
                                   ),
                                   shape: RoundedRectangleBorder(
-                                    side: const BorderSide(
-                                        color: AppColors.yellowColor),
+                                    side:  BorderSide(
+                                        color: Colorpalette.yellow),
                                     borderRadius: BorderRadius.circular(15),
                                   ),
                                 ),

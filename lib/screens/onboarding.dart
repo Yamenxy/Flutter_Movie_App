@@ -15,20 +15,20 @@ class _OnboardingScreensState extends State<OnboardingScreens> {
 
   final List<Map<String, String>> pages = [
     {
-      'image': 'assets/xl_bad-boys-ride-or-die-movie-poster_591dcde0 1.png',
+      'image': 'assets/images/xl_bad-boys-ride-or-die-movie-poster.png',
       'title': 'Create Watchlists',
       'subtitle':
           'Save movies to your watchlist to keep track of what you want to watch next. Enjoy films in various qualities and genres..'
     },
     {
-      'image': 'assets/xl_9419884_887ed6c7 1.png',
+      'image': 'assets/images/xl_9419884_887ed6c7 1.png',
       'title': 'Rate, Review, and Learn',
       'subtitle':
           'Share your thoughts on the movies you\'ve watched. Dive deep into film details and help others discover great movies with your reviews..'
     },
     {
       'image':
-          'assets/1917_-_Sam_Mendes_-_Hollywood_War_Film_Classic_English_Movie_Poster_9ef86295-4756-4c71-bb4e-20745c5fbc1a 1.png',
+          'assets/images/Sam_Mendes_-_Hollywood_War_Film_Classic_English_Movie_Poster.png',
       'title': 'Start Watching Now',
       'subtitle': ''
     },
