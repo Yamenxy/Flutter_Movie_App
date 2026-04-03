@@ -1,4 +1,8 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:movies_app/models/movies_model.dart';
+import 'package:movies_app/network_handler/network_handler.dart';
+
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -10,85 +14,61 @@ class HomeScreen extends StatelessWidget {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              // Header
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                child: Text(
-                  'Home',
-                  style: TextStyle(
-                    color: Colors.white54,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
-              ),
-
               // "Available Now" section
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: Text(
-                  'Available Now',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 28,
-                    fontWeight: FontWeight.w900,
-                    fontStyle: FontStyle.italic,
-                    shadows: [
-                      Shadow(
-                        color: Colors.black.withOpacity(0.5),
-                        blurRadius: 8,
-                        offset: const Offset(2, 2),
-                      ),
-                    ],
-                  ),
-                ),
+                padding: EdgeInsets.symmetric(horizontal: 16),
+                child: Image.asset("assets/images/availableNow.png"),
               ),
               const SizedBox(height: 12),
-
-              // Featured movie carousel
-              SizedBox(
-                height: 260,
-                child: PageView.builder(
-                  controller: PageController(viewportFraction: 0.65),
-                  itemCount: _featuredMovies.length,
-                  itemBuilder: (context, index) {
-                    final movie = _featuredMovies[index];
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 6),
-                      child: _MovieCard(
-                        title: movie['title']!,
-                        imagePath: movie['image']!,
-                        rating: movie['rating']!,
-                        isFeatured: index == 0,
+              FutureBuilder(
+                future: NetworkHandler.getAllMovies(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+                  if (snapshot.hasError) {
+                    return Text("There is Error ${snapshot.error}");
+                  }
+                  if (!snapshot.hasData) {
+                    return Text("No Movies Found");
+                  }
+                  MoviesModel? moviesModel = snapshot.data;
+                  return SizedBox(
+                    height: 260,
+                    child: CarouselSlider.builder(
+                      itemCount: moviesModel!.data!.movies!.length,
+                      itemBuilder: (context, index, rearIndex) {
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 6),
+                          child: _MovieCard(
+                            isFeatured: index == rearIndex,
+                            movie: moviesModel.data!.movies![index],
+                          ),
+                        );
+                      },
+                      options: CarouselOptions(
+                        height: 300,
+                        viewportFraction: 0.55,
+                        enlargeCenterPage: true,
+                        enlargeFactor: 0.5,
+                        enlargeStrategy: CenterPageEnlargeStrategy.height,
+                        initialPage: 2,
+                        enableInfiniteScroll: true,
+                        scrollPhysics: BouncingScrollPhysics(),
                       ),
-                    );
-                  },
-                ),
+                    ),
+                  );
+                },
               ),
 
+              // Featured movie carousel
               const SizedBox(height: 24),
-
               // "Watch Now" title
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: Text(
-                  'Watch Now',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 28,
-                    fontWeight: FontWeight.w900,
-                    fontStyle: FontStyle.italic,
-                    shadows: [
-                      Shadow(
-                        color: Colors.black.withOpacity(0.5),
-                        blurRadius: 8,
-                        offset: const Offset(2, 2),
-                      ),
-                    ],
-                  ),
-                ),
+                child: Image.asset("assets/images/WatchNow.png"),
               ),
               const SizedBox(height: 16),
 
@@ -119,28 +99,40 @@ class HomeScreen extends StatelessWidget {
                   ],
                 ),
               ),
+              FutureBuilder(
+                future: NetworkHandler.getAllMovies(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+                  if (snapshot.hasError) {
+                    return Text("There is Error ${snapshot.error}");
+                  }
+                  if (!snapshot.hasData) {
+                    return Text("No Movies Found");
+                  }
+                  MoviesModel? moviesModel = snapshot.data;
+                  return SizedBox(
+                    height: 180,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      itemCount: 10,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: const EdgeInsets.only(right: 12),
+                          child: _MovieCard(
+                            width: 120,
+                            movie: moviesModel!.data!.movies![index],
+                          ),
+                        );
+                      },
+                    ),
+                  );
+                },
+              ),
 
               // Action movies horizontal list
-              SizedBox(
-                height: 180,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  itemCount: _actionMovies.length,
-                  itemBuilder: (context, index) {
-                    final movie = _actionMovies[index];
-                    return Padding(
-                      padding: const EdgeInsets.only(right: 12),
-                      child: _MovieCard(
-                        title: movie['title']!,
-                        imagePath: movie['image']!,
-                        rating: movie['rating']!,
-                        width: 120,
-                      ),
-                    );
-                  },
-                ),
-              ),
               const SizedBox(height: 16),
             ],
           ),
@@ -150,62 +142,12 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-// Movie data
-final List<Map<String, String>> _featuredMovies = [
-  {
-    'title': '1917',
-    'image': 'assets/images/Movies Posters.png',
-    'rating': '7.7',
-  },
-  {
-    'title': 'The Godfather',
-    'image': 'assets/images/The Godfather 1.png',
-    'rating': '7.7',
-  },
-  {
-    'title': 'Action Movie',
-    'image': 'assets/images/on2.png',
-    'rating': '8.1',
-  },
-];
-
-final List<Map<String, String>> _actionMovies = [
-  {
-    'title': 'Captain America',
-    'image': 'assets/images/Movies Posters.png',
-    'rating': '7.7',
-  },
-  {
-    'title': 'The Dark Knight',
-    'image': 'assets/images/The Godfather 1.png',
-    'rating': '7.7',
-  },
-  {
-    'title': 'Spider-Man',
-    'image': 'assets/images/on2.png',
-    'rating': '8.0',
-  },
-  {
-    'title': 'Black Widow',
-    'image': 'assets/images/The Godfather 2.png',
-    'rating': '7.2',
-  },
-];
-
 class _MovieCard extends StatelessWidget {
-  final String title;
-  final String imagePath;
-  final String rating;
   final bool isFeatured;
   final double? width;
+  final Movies? movie;
 
-  const _MovieCard({
-    required this.title,
-    required this.imagePath,
-    required this.rating,
-    this.isFeatured = false,
-    this.width,
-  });
+  const _MovieCard({this.isFeatured = false, this.width, required this.movie});
 
   @override
   Widget build(BuildContext context) {
@@ -216,15 +158,18 @@ class _MovieCard extends StatelessWidget {
         child: Stack(
           fit: StackFit.expand,
           children: [
-            Image.asset(
-              imagePath,
+            Image.network(
+              movie!.largeCoverImage!,
               fit: BoxFit.cover,
-              errorBuilder: (context, error, stackTrace) => Container(
-                color: const Color(0xFF282A28),
-                child: const Center(
-                  child: Icon(Icons.movie, color: Colors.white54, size: 40),
-                ),
-              ),
+              errorBuilder: (context, error, stackTrace) {
+                print("Error $error");
+                return Container(
+                  color: const Color(0xFF282A28),
+                  child: const Center(
+                    child: Icon(Icons.movie, color: Colors.white54, size: 40),
+                  ),
+                );
+              },
             ),
             // Gradient overlay
             Positioned.fill(
@@ -233,10 +178,7 @@ class _MovieCard extends StatelessWidget {
                   gradient: LinearGradient(
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
-                    colors: [
-                      Colors.transparent,
-                      Colors.black.withOpacity(0.7),
-                    ],
+                    colors: [Colors.transparent, Colors.black],
                     stops: const [0.5, 1.0],
                   ),
                 ),
@@ -249,14 +191,14 @@ class _MovieCard extends StatelessWidget {
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
                 decoration: BoxDecoration(
-                  color: const Color(0xFF282A28).withOpacity(0.85),
+                  color: const Color(0xFF282A28),
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(
-                      rating,
+                      movie!.rating.toString(),
                       style: const TextStyle(
                         color: Colors.white,
                         fontSize: 12,
@@ -275,7 +217,7 @@ class _MovieCard extends StatelessWidget {
               left: 8,
               right: 8,
               child: Text(
-                title,
+                movie!.title!,
                 style: const TextStyle(
                   color: Colors.white,
                   fontSize: 13,

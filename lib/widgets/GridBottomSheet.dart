@@ -14,16 +14,16 @@ class _GridbottomsheetState extends State<Gridbottomsheet> {
   int selectedIndex = -1;
   @override
   Widget build(BuildContext context) {
-    List<Widget> profileImages = [
-      Assets.images.profile2.image(),
-      Assets.images.profile3.image(),
-      Assets.images.profile4.image(),
-      Assets.images.profile5.image(),
-      Assets.images.profile6.image(),
-      Assets.images.profile7.image(),
-      Assets.images.profile8.image(),
-      Assets.images.profile1.image(),
-      Assets.images.profile9.image(),
+    List<String> profileImages = [
+      Assets.images.profile2.keyName,
+      Assets.images.profile3.keyName,
+      Assets.images.profile4.keyName,
+      Assets.images.profile5.keyName,
+      Assets.images.profile6.keyName,
+      Assets.images.profile7.keyName,
+      Assets.images.profile8.keyName,
+      Assets.images.profile1.keyName,
+      Assets.images.profile9.keyName,
     ];
     return Container(
       color: Colorpalette.primaryColor,
@@ -57,7 +57,7 @@ class _GridbottomsheetState extends State<Gridbottomsheet> {
                   ),
                   child: Padding(
                     padding: const EdgeInsets.all(15.0),
-                    child: CircleAvatar(child: profileImages[index]),
+                    child: CircleAvatar(child:Image.asset( profileImages[index])),
                   ),
                 ),
               );
